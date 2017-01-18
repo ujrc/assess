@@ -1,0 +1,69 @@
+<div class="card center-block">
+    <h1 class="text-center">SMD FAMILY RISK ASSESSMENT</h1>
+    <div class="card-block">
+        <form [formGroup]="sdmForm" (ngSubmit)="onSubmit(sdmForm)">
+            <div class="row col-sm-12">
+                <div class="form-group row">
+                    <label or="referralName" class="col-sm-2 col-form-label">Referral Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" formControlName="referralName" placeholder="Referral Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="referralNumber" class="col-sm-2 col-form-label">Referral Number</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="referralNumber" formControlName="referralNumber" placeholder="Referral Number">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="countyName" class="col-sm-2 col-form-label">County Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="countyName" formControlName="countyName" placeholder="County Name">
+                    </div>
+                </div>
+            </div>
+            <div class=" row col-sm-12">
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="workerName">Worker Name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" formControlName="workerName" placeholder="Worker Name">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-from-label col-sm-2" for="workerId">Worker Id</label>
+
+                    <div class="col-sm-10">
+                        <input class="form-control" formControlName="workerId" placeholder="Worker Id">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="date">Date</label>
+                    <label for=""></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="date" formControlName="date" placeholder="date">
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div *ngFor="let topic of topics let idx=index">
+                <label for="">{{topic.id}}.{{topic.title}}</label>
+                <div *ngFor="let subitem of subitems">
+                    <label>
+        
+        {{topic.subitem.title}}
+        </label>
+                </div>
+            </div>
+
+        </form>
+
+        <br>
+        <br>
+        <br>
+        <p>Value: {{ sdmForm.value | json }}</p>
+        <p>Validation status: {{ sdmForm.status }}</p>
+    </div>
+</div>
