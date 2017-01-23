@@ -1,0 +1,8 @@
+<form [formGroup]="sdmFormGroup" (ngSubmit)="onSubmit()">
+
+    <dynamic-form-bootstrap-control *ngFor="let controlModel of formModel" [controlGroup]="sdmFormGroup" [model]="controlModel"></dynamic-form-bootstrap-control>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

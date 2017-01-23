@@ -1,4 +1,4 @@
-<div class="card center-block">
+<!--<div class="card">
     <h1 class="text-center">SMD FAMILY RISK ASSESSMENT</h1>
     <div class="card-block">
         <form [formGroup]="sdmForm" (ngSubmit)="onSubmit(sdmForm)">
@@ -46,15 +46,64 @@
                     </div>
                 </div>
             </div>
-            <br>
 
-            <div *ngFor="let topic of topics let idx=index">
-                <label for="">{{topic.id}}.{{topic.title}}</label>
-                <div *ngFor="let subitem of subitems">
-                    <label>
-        
-        {{topic.subitem.title}}
+
+            <div class="container">
+                <div *ngFor="let topic of topics">
+                    <h3>{{topic.id+'. '+ topic.title}}</h3>
+
+                    <div *ngIf="topic.subTopics==1"> {{topic.id}}</div>
+
+                </div>
+                <!--<label>Prior neglect investigations</label>
+                
         </label>
+                </div>
+
+                <label>Prior abuse investigations</label>
+                <div *ngFor="let pAbuse of priorAbuses">
+                    <label>
+        <input type="radio" formControlName="priorAbuse"  
+        [value]="pAbuse.title">
+        {{pAbuse.title}}
+        </label>
+                </div>
+
+
+                <label>Current Report maltreatment type</label>
+                <div *ngFor="let maltreatment of currentMaltreatmentTypes">
+                    <label>
+        <input type="checkbox" formControlName="currentMaltreatmentType"  
+        [value]="maltreatment.title">
+        {{maltreatment.title}}
+        </label>
+                </div>
+                <label>Characteristic of children in the household</label>
+                <div *ngFor="let characteristic of childCharacteristics; let i=index">
+                    <label>
+        <input type="radio" formControlName="childCharacteristics"  
+        [value]="characteristic.title">
+        {{characteristic.title}} <br>
+        <p *ngIf="characteristic.details">
+           <span *ngFor="let detail of characteristic.details">
+            &nbsp;&nbsp;<input type="checkbox" [value]="detail.name">
+            {{detail.name}} <br>
+            </span>
+            </p>
+         
+        </label>
+                </div>
+                <h3>Primary or secondary caregiver alcohol and/or drug use</h3>
+                <div *ngFor="let caregiverAlcoholDrugUse of caregiverAlcoholDrugUse">
+                    <label>
+        <input type="radio" formControlName="caregiverAlcoholDrugUse"  
+        [value]="caregiverAlcoholDrugUse.title">
+        {{caregiverAlcoholDrugUse.title}}
+        </label>
+                </div>
+
+                <div class="form-group row">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
 
@@ -66,4 +115,4 @@
         <p>Value: {{ sdmForm.value | json }}</p>
         <p>Validation status: {{ sdmForm.status }}</p>
     </div>
-</div>
+</div>n-->
