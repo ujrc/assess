@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="col-md-8 col-xs-12">
+        <form [formGroup]="_form" novalidate (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12" formArrayName="companies">
+                    <div *ngFor="let company of _form.controls['companies'].controls; let i=index">
+                        <div class="card">
+                            <div class="card-header text-primary">
+
+                                <span>Company {{ i+1 }}</span>
+                                <span class="pull-right" *ngIf="_form.controls['companies'].controls.length > 1" (click)="removecompany(i)">
+                  <i class="fa fa-remove text-danger"></i>
+                </span>
+                            </div>
+                            <div class="card-block" formGroupName="{{i}}">
+                                <div class="form-group">
+                                    <input type="checkbox" class="check" formControlName="company_name" />
+                                    <small [hidden]="_form.controls.companies.controls[i].controls.company_name.valid" class="text-danger">
+                      company Name is required!
+                  </small>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">company Description</label>
+                                    <textarea rows="3" type="text" class="form-control" placeholder="Description" formControlName="company_description"></textarea>
+                                </div>
+                                <div class="row" formArrayName="departments">
+                                    <div *ngFor="let department of company.controls['departments'].controls; let idx=index">
+                                        <div class="card">
+                                            <div class="card-header">
+
+                                                <span class="pull-right" *ngIf="company.controls['departments'].controls.length > 1" (click)="removedepartment(i)">
+                            <i class="fa fa-remove text-danger"></i>
+                          </span>
+                                            </div>
+                                            <div formGroupName="{{idx}}">
+                                                <div class="card-block">
+                                                    <div class="form-group col-xs-12">
+                                                        <input type="checkbox" class="form-check" formControlName="department_name">
+                                                        <label class="form-control-label">department {{idx + 1}}</label><a class="btn btn-success btn-minimize pull-right" (click)="addDepartment(i)">+</a>
+
+                                                        <small [hidden]="company.controls.departments.controls[idx].controls.department_name.valid" class="text-danger">
+                                  department Name is required!
+                              </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-primary">
+                                <a class="btn" (click)="addCompany()">Add another company +</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" style="margin-bottom:10px;">
+                <button class="btn btn-primary pull-right" type="submit" [disabled]="!_form.valid">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-4 col-xs-12">
+        <div class="card-footer">
+            <h5>Field Values</h5>
+            <pre>{{ _form.value | json }}</pre>
+        </div>
+    </div>
+</div>

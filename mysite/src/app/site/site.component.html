@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <h2 class="text-center">Data Driven Form</h2>
+    <div class="form-group">
+        <label class="control-label" for="firstName">Referral Name:</label>
+        <input class="form-control" type="text" referralName="firstName">
+        <div *ngIf="form.controls['referralName'].hasError('required') && form.controls['referralName'].touched" class="alert alert-danger">You must include a first name.</div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="referralNumber">Referral Number:</label>
+        <input class="form-control" type="text" formControlName="referralNumber">
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="countyName">County Name:</label>
+        <input class="form-control" type="text" formControlName="countyName">
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="workerName">Worker Name:</label>
+        <input class="form-control" type="text" formControlName="workerName">
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="workerId">Worker ID:</label>
+        <input class="form-control" type="text" formControlName="workerId">
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="date">Date:</label>
+        <input class="form-control" type="date" formControlName="date">
+    </div>
+    <div class="form-group">
+        <label>Gender</label>
+        <div *ngFor="let g of genders">
+            <label>
+        <input type="radio" formControlName="gender" [value]="g.value">
+        {{g.display}}
+        </label>
+        </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="!form.controls['gender'].valid && form.controls['gender'].touched">You must select a gender.</div>
+    <div class="form-group">
+        <label>Activities</label>
+
+        <div formArrayName="activities">
+            <div class="form-group" *ngFor="let activity of activities; let i = index">
+
+
+                <label>
+
+                    
+      <span formGroupName="{{i}}">
+        <input type="checkbox" formControlName="{{activity.name}}">
+          {{activity.name}}
+      </span>
+      </label>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+    </div>
+    <pre>{{form.value | json}}</pre>
+</form>
